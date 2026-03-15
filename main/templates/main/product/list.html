@@ -1,0 +1,97 @@
+{% extends "main/base.html" %}
+
+{% block title %}Все товары{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <h1 class="page-title">Все товары</h1>
+    
+    <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+            <h3>
+                <a href="{% url 'main:product_detail' product.id product.slug %}">
+                    {{ product.name }}
+                </a>
+            </h3>
+            <p class="price">{{ product.price }} ₽</p>
+            <p class="category">Категория: {{ product.category.name }}</p>
+            {% if not product.available %}
+            <p class="not-available">Нет в наличии</p>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>Товаров пока нет</p>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .container {
+        width: 100%;
+    }
+    
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 25px;
+        margin-top: 20px;
+    }
+    
+    .product-card {
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 15px;
+        padding: 20px;
+        transition: transform 0.3s;
+    }
+    
+    .product-card:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.15);
+    }
+    
+    .product-card img {
+        max-width: 100%;
+        border-radius: 10px;
+        margin-bottom: 15px;
+    }
+    
+    .product-card h3 {
+        margin: 10px 0;
+        font-size: 1.2rem;
+    }
+    
+    .product-card a {
+        color: white;
+        text-decoration: none;
+    }
+    
+    .product-card a:hover {
+        text-decoration: underline;
+    }
+    
+    .price {
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: #ff6b6b;
+        margin: 10px 0;
+    }
+    
+    .category {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.9rem;
+    }
+    
+    .not-available {
+        color: #ff6b6b;
+        font-style: italic;
+    }
+    
+    .page-title {
+        margin-top: 0;
+    }
+</style>
+{% endblock content %}
