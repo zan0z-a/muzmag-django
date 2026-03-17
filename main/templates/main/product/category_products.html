@@ -1,8 +1,10 @@
 {% extends "main/base.html" %}
 
-{% block title %}Список всех товаров{% endblock title %}
+{% block title %}{{ category.name }}{% endblock title %}
 
 {% block content %}
+<h1 class="page-title">{{ category.name }}</h1>
+
 <div class="products-grid">
     {% for product in products %}
     <div class="product-card">
@@ -12,10 +14,19 @@
             <a href="{% url 'main:product_detail' product.id product.slug %}" class="details-btn">Подробнее</a>
         </div>
     </div>
+    {% empty %}
+    <p>В этой категории пока нет товаров</p>
     {% endfor %}
 </div>
 
 <style>
+.page-title {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #fff;
+}
+
 .products-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);

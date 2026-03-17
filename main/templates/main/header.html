@@ -2,10 +2,10 @@
     <div class="main-sidebar-header">МЕНЮ</div>
     
     <nav class="main-sidebar-nav">
-        <a href="" class="main-sidebar-link">Все товары</a>
-        <a href="#" class="main-sidebar-link">Категории</a>
+        <a href="{% url "main:main" %}" class="main-sidebar-link">Все товары</a>
+        <a href="{% url 'main:category' %}" class="main-sidebar-link">Категории</a>
         <a href="{% url 'main:about_page' %}" class="main-sidebar-link">О нас</a>
-        <a href="#" class="main-sidebar-link">Контакты</a>
+        <a href="{% url "main:contact" %}" class="main-sidebar-link">Контакты</a>
     </nav>
     
     <div class="main-sidebar-divider"></div>

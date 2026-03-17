@@ -1,0 +1,63 @@
+{% extends "main/base.html" %}
+
+{% block title %}Категории товаров{% endblock title %}
+
+{% block content %}
+<div class="categories-page">
+    <h1 class="page-title">Категории товаров</h1>
+    
+    <div class="categories-grid">
+        {% for category in categories %}
+        <a href="{% url 'main:product_list_by_category' category.slug %}" class="category-card">
+            <h3>{{ category.name }}</h3>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.categories-page {
+    width: 100%;
+}
+
+.page-title {
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-size: 32px;
+    color: #fff;
+}
+
+.categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.category-card {
+    background: rgba(9, 9, 10, 0.85);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    padding: 40px 20px;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid rgba(255, 140, 50, 0.2);
+    transition: all 0.3s;
+}
+
+.category-card:hover {
+    background: rgba(255, 140, 50, 0.25);
+    transform: translateY(-5px);
+    border-color: #ffb347;
+}
+
+.category-card h3 {
+    font-size: 20px;
+    color: #ffb347;
+    margin: 0;
+    font-weight: 600;
+}
+</style>
+{% endblock content %}
