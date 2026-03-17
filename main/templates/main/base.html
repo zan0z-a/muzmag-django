@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{%block title%}{% endblock title %}</title>
+    <title>{% block title %}{% endblock title %}</title>
     <style>
         html, body {
             height: 100%;
@@ -64,12 +64,11 @@
         }
         
         .page-title {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 0;
+            margin-bottom: 30px;
+            font-size: 32px;
+            color: #fff;
         }
-        
     </style>
 </head>
 <body>
@@ -77,6 +76,10 @@
     
     <div class="content">
         <div class="main-card">
+            {% block page-title %}
+            <h1 class="page-title">{{ page_title|default:"" }}</h1>
+            {% endblock %}
+            
             {% block content %}{% endblock content %}
         </div>
     </div>

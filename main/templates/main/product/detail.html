@@ -1,10 +1,20 @@
 {% extends "main/base.html" %}
 
-{% block title %}{{ product.name }}{% endblock title %}
+{% block page-title %}
+<h1 class="page-title">{{ product.name }}</h1>
+{% endblock %}
 
 {% block content %}
 <div class="product-page">
     <div class="product-container">
+        {% if product.image %}
+        <div class="product-image-section">
+            <div class="product-image-container">
+                <img class="product-main-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+            </div>
+        </div>
+        {% endif %}
+        
         <div class="product-info-section">
             <h1 class="product-title">{{ product.name }}</h1>
             
@@ -29,15 +39,40 @@
 }
 
 .product-container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
     background: rgba(25, 25, 30, 0.5);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 140, 50, 0.2);
     border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
     overflow: hidden;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.product-image-section {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.product-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.product-main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .product-info-section {

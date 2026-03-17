@@ -2,10 +2,12 @@
 
 {% block title %}Категории товаров{% endblock title %}
 
+{% block page-title %}
+<h1 class="page-title">Категории товаров</h1>
+{% endblock %}
+
 {% block content %}
 <div class="categories-page">
-    <h1 class="page-title">Категории товаров</h1>
-    
     <div class="categories-grid">
         {% for category in categories %}
         <a href="{% url 'main:product_list_by_category' category.slug %}" class="category-card">
@@ -30,9 +32,9 @@
 .categories-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 30px;
-    padding: 40px;
-    max-width: 1400px;
+    gap: 20px;  /* уменьшил отступы */
+    padding: 20px;  /* уменьшил паддинг */
+    max-width: 1200px;  
     margin: 0 auto;
 }
 
@@ -40,24 +42,30 @@
     background: rgba(9, 9, 10, 0.85);
     backdrop-filter: blur(4px);
     border-radius: 12px;
-    padding: 40px 20px;
+    padding: 25px 15px; 
     text-align: center;
     text-decoration: none;
     border: 1px solid rgba(255, 140, 50, 0.2);
     transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 80px; 
 }
 
 .category-card:hover {
     background: rgba(255, 140, 50, 0.25);
-    transform: translateY(-5px);
+    transform: translateY(-3px);
     border-color: #ffb347;
 }
 
 .category-card h3 {
-    font-size: 20px;
+    font-size: 18px;  
     color: #ffb347;
     margin: 0;
     font-weight: 600;
+    word-break: break-word;  
+    line-height: 1.3;
 }
 </style>
 {% endblock content %}

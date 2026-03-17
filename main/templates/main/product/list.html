@@ -1,11 +1,20 @@
 {% extends "main/base.html" %}
 
+{% block page-title %}
+<h1 class="page-title">Список всех товаров</h1>
+{% endblock %}
+
 {% block title %}Список всех товаров{% endblock title %}
 
 {% block content %}
 <div class="products-grid">
     {% for product in products %}
     <div class="product-card">
+        {% if product.image %}
+        <div class="product-image-container">
+            <img class="product-image" src="{{ product.image.url }}" alt="{{ product.name }}">
+        </div>
+        {% endif %}
         <div class="product-info">
             <h3 class="product-title">{{ product.name }}</h3>
             <div class="product-price">{{ product.price }} ₽</div>
@@ -33,6 +42,20 @@
     border: 1px solid rgba(255, 140, 50, 0.2);
     display: flex;
     flex-direction: column;
+}
+
+.product-image-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;  /* Квадратное соотношение сторон */
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.product-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;  /* Заполняет контейнер, обрезая лишнее */
+    display: block;
 }
 
 .product-info {

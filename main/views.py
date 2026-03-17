@@ -1,13 +1,6 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 
-def category_page(request):
-    """Страница со всеми категориями"""
-    categories = Category.objects.all()
-    return render(request, "main/category_list.html", {  # новый шаблон
-        'categories': categories
-    })
-
 def product_list(request, category_slug=None):
     categories = Category.objects.all()  
     products = Product.objects.filter(available=True)
@@ -16,9 +9,9 @@ def product_list(request, category_slug=None):
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         products = products.filter(category=category)
-        template_name = 'main/product/category_products.html'  # новый шаблон для товаров категории
+        template_name = 'main/product/category_products.html'  
     else:
-        template_name = 'main/product/list.html'  # все товары
+        template_name = 'main/product/list.html' 
     
     return render(request, template_name, {
         'category': category,
@@ -41,20 +34,20 @@ def product_detail(request, id, slug):
     })
 
 def about_page(request):
-    return render(request, "main/public/about.html",)
+    return render(request, "main/public/about.html")
 
 def login_page(request):
     return render(request, "main/public/login.html")
 
 def reg_page(request):
-    return render(request,"main/public/reg.html")
+    return render(request, "main/public/reg.html")
 
 def contact_page(request):
-    return render(request,"main/public/contact.html")
+    return render(request, "main/public/contact.html")
 
 def category_page(request):
     """Страница со всеми категориями"""
-    categories = Category.objects.all()  # Получаем все категории
-    return render(request, "main/product/category.html", {
-        'categories': categories  # Передаем категории в шаблон
+    categories = Category.objects.all()
+    return render(request, "main/product/category_list.html", {  
+        'categories': categories
     })
