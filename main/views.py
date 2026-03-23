@@ -49,6 +49,9 @@ def reg_page(request):
 def contact_page(request):
     return render(request, "main/public/contact.html")
 
+def cart_page(request):
+    return render(request, "main/public/cart.html")
+
 def category_page(request):
     """Страница со всеми категориями"""
     categories = Category.objects.all()
