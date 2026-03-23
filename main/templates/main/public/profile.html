@@ -1,0 +1,112 @@
+{% extends "main/base.html" %}
+
+{% block title %}Профиль пользователя{% endblock title %}
+
+{% block page-title %}
+<h1 class="page-title">Профиль</h1>
+{% endblock %}
+
+{% block content %}
+<div class="profile-section">
+    <div class="profile-card">
+        <div class="profile-avatar">
+            <div class="avatar-placeholder">
+                {{ user.username|slice:":1"|upper }}
+            </div>
+        </div>
+        
+        <div class="profile-info">
+            <div class="info-row">
+                <span class="info-label">Имя пользователя:</span>
+                <span class="info-value">{{ user.username }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Email:</span>
+                <span class="info-value">{{ user.email }}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Дата регистрации:</span>
+                <span class="info-value">{{ user.date_joined|date:"d.m.Y" }}</span>
+            </div>
+        </div>
+        
+        <a href="{% url 'main:logout' %}" class="logout-button">Выйти из аккаунта</a>
+    </div>
+</div>
+
+<style>
+.profile-section {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.profile-card {
+    background: rgba(25, 25, 30, 0.5);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 140, 50, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+}
+
+.profile-avatar {
+    margin-bottom: 30px;
+}
+
+.avatar-placeholder {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 140, 50, 0.25);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 48px;
+    font-weight: bold;
+    color: #ffb347;
+    border: 2px solid rgba(255, 140, 50, 0.4);
+}
+
+.profile-info {
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+.info-row {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.info-label {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.info-value {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.logout-button {
+    display: block;
+    padding: 12px 20px;
+    background: rgba(255, 87, 87, 0.25);
+    border: 1px solid rgba(255, 87, 87, 0.4);
+    border-radius: 10px;
+    color: #ffb347;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.logout-button:hover {
+    background: rgba(255, 87, 87, 0.4);
+    color: #fff;
+}
+</style>
+{% endblock content %}

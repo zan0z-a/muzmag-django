@@ -7,4 +7,174 @@
 {% endblock %}
 
 {% block content %}
+<div class="login-section">
+    <h2 class="section-title">Создание аккаунта</h2>
+    
+    {% if form.errors %}
+    <div class="alert-error">
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <div>{{ error }}</div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert-{% if message.tags %}{{ message.tags }}{% else %}success{% endif %}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+<form method="POST" action="{% url 'main:register' %}" class="login-form">
+        {% csrf_token %}
+    
+    <div class="form-field">
+        <input type="text" name="username" value="{{ request.POST.username }}" 
+               placeholder="Имя пользователя" class="form-input" required>
+    </div>
+    
+    <div class="form-field">
+        <input type="email" name="email" value="{{ request.POST.email }}" 
+               placeholder="Email" class="form-input" required>
+    </div>
+    
+    <div class="form-field">
+        <input type="password" name="password1" 
+               placeholder="Пароль" class="form-input" required>
+    </div>
+    
+    <div class="form-field">
+        <input type="password" name="password2" 
+               placeholder="Подтверждение пароля" class="form-input" required>
+    </div>
+    
+    <button type="submit" class="submit-button">Зарегистрироваться</button>
+    
+    <div class="form-footer">
+        <a href="{% url 'main:login_page' %}">Уже есть аккаунт? Войти</a>
+    </div>
+</form>
+</div>
+
+<style>
+.login-section {
+    background: rgba(25, 25, 30, 0.5);  
+    backdrop-filter: blur(5px);        
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 140, 50, 0.2);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 450px;
+    width: 100%;
+    margin: 20px auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.section-title {
+    color: #ffb347;
+    font-size: 28px;
+    margin-bottom: 25px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-align: center;
+}
+
+.alert-error {
+    background: rgba(255, 87, 87, 0.15);
+    border: 1px solid rgba(255, 87, 87, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #ffb347;
+    font-size: 14px;
+}
+
+.alert-success {
+    background: rgba(76, 175, 80, 0.15);
+    border: 1px solid rgba(76, 175, 80, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    color: #ffb347;
+    font-size: 14px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 450px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.form-field {
+    width: 100%;
+}
+
+.form-input {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 140, 50, 0.2);
+    border-radius: 10px;
+    font-size: 15px;
+    color: #fff;
+    box-sizing: border-box;
+    transition: all 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: #ffb347;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.form-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 14px;
+    background: rgba(255, 140, 50, 0.25);
+    border: 1px solid rgba(255, 140, 50, 0.4);
+    border-radius: 10px;
+    color: #ffb347;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 10px;
+}
+
+.submit-button:hover {
+    background: rgba(255, 140, 50, 0.4);
+    color: #fff;
+    border-color: #ffb347;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.form-footer a {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.form-footer a:hover {
+    color: #ffb347;
+}
+</style>
 {% endblock content %}

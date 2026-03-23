@@ -10,6 +10,10 @@ urlpatterns = [
     path('reg_page', views.reg_page, name="reg_page"),
     path('contact', views.contact_page, name="contact"),
     path('category', views.category_page, name="category"),
-    path("<slug:category_slug>/", views.product_list, name="product_list_by_category"),
+    path('profile', views.profile_page, name="profile"), 
+    path('login/', views.login_view, name='login'),
+    path('register/', views.register_view, name='register'),
+    path('logout/', views.logout_view, name='logout'),
+    path('<slug:category_slug>/', views.product_list, name="product_list_by_category"),
     path('<int:id>/<slug:slug>', views.product_detail, name='product_detail'),
 ]

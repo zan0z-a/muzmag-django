@@ -2,22 +2,46 @@
     <div class="main-sidebar-header">МЕНЮ</div>
     
     <nav class="main-sidebar-nav">
-        <a href="{% url "main:main" %}" class="main-sidebar-link">Все товары</a>
+        <a href="{% url 'main:main' %}" class="main-sidebar-link">Все товары</a>
         <a href="{% url 'main:category' %}" class="main-sidebar-link">Категории</a>
         <a href="{% url 'main:about_page' %}" class="main-sidebar-link">О нас</a>
-        <a href="{% url "main:contact" %}" class="main-sidebar-link">Контакты</a>
+        <a href="{% url 'main:contact' %}" class="main-sidebar-link">Контакты</a>
     </nav>
     
     <div class="main-sidebar-divider"></div>
     
     <div class="main-sidebar-header">Аккаунт</div>
     <nav class="main-sidebar-nav">
-        <a href="{% url "main:login_page" %}" class="main-sidebar-link">Логин</a>
-        <a href="{% url "main:reg_page" %}" class="main-sidebar-link">Регистрация</a>
+        {% if user.is_authenticated %}
+            <a href="{% url 'main:profile' %}" class="main-sidebar-link">Профиль</a>
+            {% if user.is_superuser or user.is_staff %}
+                <a href="/admin/" class="main-sidebar-link">Админка</a>
+            {% endif %}
+            <a href="{% url 'main:logout' %}" class="main-sidebar-link">Выйти</a>
+        {% else %}
+            <a href="{% url 'main:login_page' %}" class="main-sidebar-link">Логин</a>
+            <a href="{% url 'main:reg_page' %}" class="main-sidebar-link">Регистрация</a>
+        {% endif %}
     </nav>
 </div>
 
 <style>
+    .admin-link {
+    border-left: 3px solid #ff6b6b;
+    background: rgba(255, 107, 107, 0.1);
+    }   
+
+    .admin-link:hover {
+        background: rgba(255, 107, 107, 0.2);
+    }
+    .user-info {
+    padding: 12px 20px;
+    color: #ffb347;
+    font-weight: 500;
+    cursor: default;
+    border-bottom: 1px solid rgba(255, 140, 50, 0.2);
+    margin-bottom: 5px;
+    }
     .main-sidebar {
         position: fixed;
         left: 100px;
